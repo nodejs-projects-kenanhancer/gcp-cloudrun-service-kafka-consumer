@@ -1,0 +1,58 @@
+repos:
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: yarn eslint
+        language: system
+        types_or: [javascript, ts]
+        args: ['--fix']
+        pass_filenames: true
+
+      - id: prettier
+        name: prettier
+        entry: yarn prettier
+        language: system
+        types_or: [javascript, ts, json, markdown, yaml]
+        args: ['--write']
+        pass_filenames: true
+
+      - id: tsc
+        name: tsc
+        entry: yarn tsc
+        language: system
+        args: ['--noEmit']
+        pass_filenames: false
+
+      # Shared/Common hooks
+      - id: end-of-file-fixer
+        name: end-of-file-fixer
+        entry: yarn end-of-file-fixer
+        language: system
+        types: [text]
+
+      - id: trailing-whitespace
+        name: trailing-whitespace-fixer
+        entry: yarn trailing-whitespace-fixer
+        language: system
+        types: [text]
+
+      - id: check-yaml
+        name: check-yaml
+        entry: yarn check-yaml
+        language: system
+        files: \.(yml|yaml)$
+
+      - id: pretty-format-json
+        name: pretty-format-json
+        entry: yarn pretty-format-json
+        language: system
+        args: ['--autofix', '--indent', '2']
+        files: \.(json)$
+        exclude: '^\.vscode/|package.json|tsconfig.json'
+
+      - id: mdformat
+        name: mdformat
+        entry: yarn mdformat
+        language: system
+        files: \.(md|markdown)$
