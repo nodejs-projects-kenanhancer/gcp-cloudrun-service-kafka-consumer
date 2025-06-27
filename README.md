@@ -185,7 +185,7 @@ brew install asdf
 
    ```bash
    ENVIRONMENT=preprod
-   GCP_PROJECT_ID=nexum-dev-364711
+   GCP_PROJECT_ID=<GCP-PROJECT-ID>
    ```
 
 1. Install Dependencies:
@@ -243,23 +243,23 @@ brew install asdf
 
   ```bash
   gcloud run services list \
-    --project=nexum-dev-364711 \
+    --project=<GCP-PROJECT-ID> \
     --region=europe-north1
   ```
 
 - How to Get Logs for a Gen2 Cloud Function
 
   ```bash
-  gcloud functions logs read collection-status-dev \
-    --project=nexum-dev-364711 \
+  gcloud functions logs read say-hello-dev \
+    --project=<GCP-PROJECT-ID> \
     --region=europe-north1
   ```
 
   OR
 
   ```bash
-  gcloud functions logs read collection-status-dev \
-    --project=nexum-dev-364711 \
+  gcloud functions logs read say-hello-dev \
+    --project=<GCP-PROJECT-ID> \
     --region=europe-north1 \
     --limit=5 \
     --format=json
@@ -277,10 +277,10 @@ brew install asdf
 ### Project Management
 
 ```bash
-gcloud config list                                    # View current configuration
-gcloud config set project <PROJECT-ID>                # Switch active project
+gcloud config list                                                  # View current configuration
+gcloud config set project <GCP-PROJECT-ID>                          # Switch active project
 gcloud config configurations create <CONFIGURATION_NAME>
-gcloud projects list                                  # List all projects
+gcloud projects list                                                # List all projects
 ```
 
 ### IAM & Service Accounts
@@ -290,36 +290,36 @@ gcloud projects list                                  # List all projects
 gcloud iam service-accounts list                                    # List service accounts
 gcloud iam service-accounts describe <SERVICE-ACCOUNT-EMAIL>        # Get details of a service account
 gcloud iam service-accounts get-iam-policy <SERVICE-ACCOUNT-EMAIL>  # Get IAM policy for service account
-gcloud iam roles list --project=<PROJECT-ID>                        # List IAM roles
+gcloud iam roles list --project=<GCP-PROJECT-ID>                    # List IAM roles
 gcloud projects get-iam-policy                                      # View project IAM policy
 
 # Enable/Disable
-gcloud iam service-accounts enable <SERVICE-ACCOUNT-EMAIL>         # Enable service account
-gcloud iam service-accounts disable <SERVICE-ACCOUNT-EMAIL>        # Disable service account
+gcloud iam service-accounts enable <SERVICE-ACCOUNT-EMAIL>          # Enable service account
+gcloud iam service-accounts disable <SERVICE-ACCOUNT-EMAIL>         # Disable service account
 
 # Update
-gcloud iam service-accounts update <SERVICE-ACCOUNT-EMAIL> \       # Update display name
+gcloud iam service-accounts update <SERVICE-ACCOUNT-EMAIL> \        # Update display name
     --display-name="New Display Name"
 
 # Create and Delete
-gcloud iam service-accounts create <ACCOUNT-ID>                    # Create new service account
-gcloud iam service-accounts delete <SERVICE-ACCOUNT-EMAIL>         # Delete service account
+gcloud iam service-accounts create <ACCOUNT-ID>                     # Create new service account
+gcloud iam service-accounts delete <SERVICE-ACCOUNT-EMAIL>          # Delete service account
 
 # Keys Management
-gcloud iam service-accounts keys list \                            # List keys for service account
+gcloud iam service-accounts keys list \                             # List keys for service account
     --iam-account=<SERVICE-ACCOUNT-EMAIL>
-gcloud iam service-accounts keys create key.json \                 # Create new key
+gcloud iam service-accounts keys create key.json \                  # Create new key
     --iam-account=<SERVICE-ACCOUNT-EMAIL>
-cat key.json | base64                                              # Display key content (for GitHub secret)
+cat key.json | base64                                               # Display key content (for GitHub secret)
 
-gcloud iam service-accounts keys create - \                        # To print out  directly to terminal
+gcloud iam service-accounts keys create - \                         # To print out  directly to terminal
     --iam-account=<SERVICE-ACCOUNT-EMAIL> \
     --format='get(privateKeyData)'
-gcloud iam service-accounts keys delete <KEY-ID> \                 # Delete key
+gcloud iam service-accounts keys delete <KEY-ID> \                  # Delete key
     --iam-account=<SERVICE-ACCOUNT-EMAIL>
 
 # IAM Policy
-gcloud projects add-iam-policy-binding <PROJECT-ID> \              # Grant role to service account
+gcloud projects add-iam-policy-binding <GCP-PROJECT-ID> \           # Grant role to service account
     --member="serviceAccount:<SERVICE-ACCOUNT-EMAIL>" \
     --role="<ROLE-ID>"
 ```
@@ -349,7 +349,7 @@ gcloud container clusters get-credentials <CLUSTER-NAME>    # Configure kubectl
 
 ### Common Options
 
-- `--project=<PROJECT-ID>`: Specify project
+- `--project=<GCP-PROJECT-ID>`: Specify project
 - `--format=[json|yaml]`: Change output format
 - `--filter="<EXPRESSION>"`: Filter results
 
@@ -377,7 +377,7 @@ gcloud auth login                         # Authenticate account
 ```bash
 cd ./gcp-cloudrun-service-kafka-consumer
 source ./scripts/init_terraform.sh
-gcp_project_id=<PROJECT-ID>
+gcp_project_id=<GCP-PROJECT-ID>
 gcp_bucket_name=terraform-state-bucket
 terraform_dir=terraform
 encryption_key="ch4xHNN/6Jlnt7wzZMD0nA3/vjb13YOmUHqhTrZc84c="
