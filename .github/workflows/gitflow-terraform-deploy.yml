@@ -1,4 +1,4 @@
-name: 'Terraform Deploy'
+name: 'Gitflow Terraform Deploy'
 
 on:
   push:
@@ -10,12 +10,18 @@ on:
       - 'hotfix/**'
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/gitflow-terraform-deploy.yml'
   pull_request:
     types: [opened, reopened, closed, synchronize]
     branches:
       - main
       - dev
       - 'release/**'
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/gitflow-terraform-deploy.yml'
   workflow_dispatch:
     inputs:
       environment:
