@@ -116,17 +116,34 @@ brew install asdf
 
 ### YARN
 
-- Yarn is a fast, reliable, and secure dependency management tool for Node.js, optimized for performance and consistency. Install Yarn globally using npm:
+- **You do NOT need to install Yarn globally.** This project uses **Yarn 4.9.1** as specified in `package.json` via the `packageManager` field. We use **Corepack**, which comes built-in with Node.js 16.9+ and 14.19+, to automatically manage the correct Yarn version.
+
+- Corepack automatically downloads and uses the Yarn version specified in your project's `package.json` (4.9.1 in this case), so there's no need for a global Yarn installation.
+
+- Enable Corepack (required once per system):
 
   ```bash
-  npm install -g yarn
+  corepack enable
   ```
 
-- Verify the installation:
+- **If using asdf:** After enabling Corepack, you need to reshim asdf to make the `yarn` command available:
 
   ```bash
-  yarn --version
+  asdf reshim nodejs
   ```
+
+- After enabling Corepack, Yarn will automatically use version 4.9.1 when you run `yarn install` or other yarn commands in this project. Corepack will download Yarn 4.9.1 on first use if it's not already cached.
+
+- Verify Corepack is enabled and Yarn is available:
+
+  ```bash
+  corepack --version
+  yarn --version  # Should show 4.9.1
+  ```
+
+- When you run `yarn install` for the first time, Corepack will automatically download Yarn 4.9.1 if it's not already cached.
+
+> **Note:** If you encounter an error like "This project's package.json defines 'packageManager': 'yarn@4.9.1'. However the current global version of Yarn is X.X.X", you need to enable Corepack by running `corepack enable`. If using asdf, also run `asdf reshim nodejs` afterwards. Corepack must be enabled to use the package manager version specified in the project's `package.json`.
 
 ### Nest.js
 
