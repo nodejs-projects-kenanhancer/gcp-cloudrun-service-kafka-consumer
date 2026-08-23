@@ -393,12 +393,9 @@ gcloud auth login                         # Authenticate account
 
 ```bash
 cd ./gcp-cloudrun-service-kafka-consumer
-source ./scripts/init_terraform.sh
 gcp_project_id=<GCP-PROJECT-ID>
-gcp_bucket_name=terraform-state-bucket
 terraform_dir=terraform
-encryption_key="ch4xHNN/6Jlnt7wzZMD0nA3/vjb13YOmUHqhTrZc84c="
-init_terraform -b $gcp_bucket_name -p $gcp_project_id -d $terraform_dir -k $encryption_key
+./scripts/init_terraform.sh -p gcp -i $gcp_project_id -d $terraform_dir
 terraform -chdir=terraform plan
 terraform -chdir=terraform apply
 ```

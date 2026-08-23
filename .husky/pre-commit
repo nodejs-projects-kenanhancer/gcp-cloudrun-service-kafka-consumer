@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Run the shared scripts test suite
+./scripts/tests/run_tests.sh
+
 # Run lint-staged first (which handles linting and formatting)
 yarn lint-staged
 
